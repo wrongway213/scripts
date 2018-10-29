@@ -46,7 +46,7 @@ process_build () {
 
 	# Make zip.
 	cd ${REPO_ROOT}/AnyKernelBase
-	.zip -r9 ${REPO_ROOT}/Krieg-EAS-$1-V-$VERSION.zip * -x README Krieg-EAS-$1-V-$VERSION.zip
+	zip -r9 ${REPO_ROOT}/Krieg-EAS-$1-V-$VERSION.zip * -x README Krieg-EAS-$1-V-$VERSION.zip
 
 	# Clean up at the end as well for good measure
 	rm -rf ${REPO_ROOT}/OP5-OP5T/out
