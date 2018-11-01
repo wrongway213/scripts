@@ -23,6 +23,9 @@ fi
 
 # Clang and GCC paths
 CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r328903/bin/clang
+if [ ${USE_CCACHE:-"0"} = "1" ]; then
+    CLANG="ccache ${CLANG}"
+fi
 CROSS_COMPILE=${REPO_ROOT}/ToolChains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 process_build () {
