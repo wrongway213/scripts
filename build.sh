@@ -62,7 +62,7 @@ process_build () {
 		echo "${TEXTGREEN}Non-Treble Build Complete${TEXTRESET}"
 		git reset --hard HEAD~1
 	else
-		echo "${TEXTGREEN}Non-Treble Build Complete${TEXTRESET}"
+		echo "${TEXTGREEN}Treble Build Complete${TEXTRESET}"
 	fi
 	
 }
