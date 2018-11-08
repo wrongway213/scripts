@@ -7,7 +7,7 @@ TEXTRED=$(tput setaf 1)
 echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
 
 # Export compiler name
-export COMPILER_NAME="CLANG-7.0.2"
+export COMPILER_NAME="CLANG-8.0.3"
 
 if [ -z ${KRIEG_SCRIPT+x} ]; then
 	cd ..
@@ -22,7 +22,7 @@ if [ -z "$1" ]
 fi
 
 # Clang and GCC paths
-CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r328903/bin/clang
+CLANG=${REPO_ROOT}/ToolChains/linux-x86/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
     CLANG="ccache ${CLANG}"
 fi
