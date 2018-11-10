@@ -29,6 +29,8 @@ fi
 CROSS_COMPILE=${REPO_ROOT}/ToolChains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 process_build () {
+	mkdir -p ${REPO_ROOT}/AnyKernelBase/kernels/custom
+	mkdir -p ${REPO_ROOT}/AnyKernelBase/kernels/oos
 	if [ $1 = "nontreble" ]; then
 		echo "${TEXTGREEN}Building for non-treble. Reverting vendor parition mounting in DTSI${TEXTRESET}"
 		git am ${REPO_ROOT}/scripts/patches/0001-Revert-oneplus5-custom-mount-vendor-partition.patch
@@ -68,10 +70,8 @@ process_build () {
 }
 
 
-# Build "custom" kernel
+# Clean up if anything is remaining.
 rm -rf ${REPO_ROOT}/OP5-OP5T/out/
-mkdir -p ${REPO_ROOT}/AnyKernelBase/kernels/custom
-mkdir -p ${REPO_ROOT}/AnyKernelBase/kernels/oos
 
 cd ${REPO_ROOT}/OP5-OP5T
 
