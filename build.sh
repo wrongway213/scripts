@@ -3,6 +3,7 @@ SECONDS=0
 TEXTRESET=$(tput sgr0)
 TEXTGREEN=$(tput setaf 2)
 TEXTRED=$(tput setaf 1)
+BUILD_SUCCESS="999"
 
 echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
 
@@ -46,17 +47,24 @@ process_build () {
 						  CROSS_COMPILE="${CROSS_COMPILE}" \
 						  KBUILD_COMPILER_STRING="$(${CLANG}  --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')" \
 
-	# Move custom Image  to AK
-	cp ${REPO_ROOT}/OP5-OP5T/out/arch/arm64/boot/Image.gz-dtb ${REPO_ROOT}/AnyKernelBase/kernels/custom/Image.gz-dtb
+    # Check exit code of the make command
+    BUILD_SUCCESS=$?
+    
+    if [ "$BUILD_SUCCESS" -ne "0" ]; then
+		echo "${TEXTRED} Build for - $1 - failed! Aborting further processing!${TEXTRESET}"
+		return 1
+	else
+		# Move custom Image  to AK
+		cp ${REPO_ROOT}/OP5-OP5T/out/arch/arm64/boot/Image.gz-dtb ${REPO_ROOT}/AnyKernelBase/kernels/custom/Image.gz-dtb
 
-	# Make zip.
-	cd ${REPO_ROOT}/AnyKernelBase
-	zip -r9 ${REPO_ROOT}/Krieg-EAS-$1-V-$VERSION.zip * -x README Krieg-EAS-$1-V-$VERSION.zip
+		# Make zip.
+		cd ${REPO_ROOT}/AnyKernelBase
+		zip -r9 ${REPO_ROOT}/Krieg-EAS-$1-V-$VERSION.zip * -x README Krieg-EAS-$1-V-$VERSION.zip
 
-	# Clean up at the end as well for good measure
-	rm -rf ${REPO_ROOT}/OP5-OP5T/out
-	rm -rf ${REPO_ROOT}/AnyKernelBase/kernels/
-
+		# Clean up at the end as well for good measure
+		rm -rf ${REPO_ROOT}/OP5-OP5T/out
+		rm -rf ${REPO_ROOT}/AnyKernelBase/kernels/
+	fi
 	# Back to Source
 	cd ${REPO_ROOT}/OP5-OP5T
 	
@@ -76,8 +84,10 @@ rm -rf ${REPO_ROOT}/OP5-OP5T/out/
 cd ${REPO_ROOT}/OP5-OP5T
 
 process_build treble
-process_build nontreble
-
-duration=$SECONDS
-echo "${TEXTGREEN}Builds complete. The zips can be found at: ${REPO_ROOT}${TEXTRESET}"
-echo "${TEXTGREEN}Total time taken: $(($duration / 60)):$(($duration % 60))${TEXTRESET}"
+if [ "$BUILD_SUCCESS" -eq "0" ]; then
+	process_build nontreble
+	
+	duration=$SECONDS
+	echo "${TEXTGREEN}Builds complete. The zips can be found at: ${REPO_ROOT}${TEXTRESET}"
+	echo "${TEXTGREEN}Total time taken: $(($duration / 60)):$(($duration % 60))${TEXTRESET}"
+fi
