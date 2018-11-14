@@ -75,6 +75,10 @@ process_build () {
 		echo "${TEXTGREEN}Treble Build Complete${TEXTRESET}"
 	fi
 	
+	if [ -z "$1" ]; then
+		process_build non_treble
+	fi
+	
 }
 
 
@@ -83,10 +87,19 @@ rm -rf ${REPO_ROOT}/OP5-OP5T/out/
 
 cd ${REPO_ROOT}/OP5-OP5T
 
-process_build treble
+case "$1" in
+	"treble")
+		process_build treble
+		;;
+	"nontreble")
+		process_build nontreble
+		;;
+	*)
+		process_build
+		;;
+esac
+
 if [ "$BUILD_SUCCESS" -eq "0" ]; then
-	process_build nontreble
-	
 	duration=$SECONDS
 	echo "${TEXTGREEN}Builds complete. The zips can be found at: ${REPO_ROOT}${TEXTRESET}"
 	echo "${TEXTGREEN}Total time taken: $(($duration / 60)):$(($duration % 60))${TEXTRESET}"
