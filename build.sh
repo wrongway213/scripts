@@ -8,7 +8,7 @@ BUILD_SUCCESS="999"
 echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
 
 # Export compiler name
-export COMPILER_NAME="CLANG-8.0.3"
+export COMPILER_NAME="CLANG-8.0.4"
 
 if [ -z ${KRIEG_SCRIPT+x} ]; then
 	cd ..
@@ -23,7 +23,7 @@ if [ -z "$1" ]
 fi
 
 # Clang and GCC paths
-CLANG=${REPO_ROOT}/ToolChains/linux-x86/bin/clang
+CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r344140b/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
     CLANG="ccache ${CLANG}"
 fi
