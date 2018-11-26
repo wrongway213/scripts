@@ -74,6 +74,11 @@ process_build () {
 	else
 		echo "${TEXTGREEN}Treble Build Complete${TEXTRESET}"
 	fi
+	
+	if [ -z "$1" ]; then
+		process_build non_treble
+	fi
+	
 }
 
 
@@ -85,6 +90,9 @@ cd ${REPO_ROOT}/OP5-OP5T
 case "$1" in
 	"treble")
 		process_build treble
+		;;
+	"nontreble")
+		process_build nontreble
 		;;
 	*)
 		process_build
