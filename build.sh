@@ -23,7 +23,7 @@ if [ -z "$1" ]
 fi
 
 # Clang and GCC paths
-CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r344140b/bin/clang
+CLANG=${REPO_ROOT}/ToolChains/linux-x86/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
     CLANG="ccache ${CLANG}"
 fi
