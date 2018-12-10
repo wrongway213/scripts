@@ -75,10 +75,6 @@ process_build () {
 		echo "${TEXTGREEN}Treble Build Complete${TEXTRESET}"
 	fi
 	
-	if [ -z "$1" ]; then
-		process_build non_treble
-	fi
-	
 }
 
 
