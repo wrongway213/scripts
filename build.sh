@@ -5,8 +5,6 @@ TEXTGREEN=$(tput setaf 2)
 TEXTRED=$(tput setaf 1)
 BUILD_SUCCESS="999"
 
-echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
-
 export COMPILER_NAME="CLANG-8.0.3"
 # Export compiler name
 
@@ -15,11 +13,11 @@ if [ -z ${KRIEG_SCRIPT+x} ]; then
 fi
 REPO_ROOT=`pwd`
 
-if [ -z "$1" ]
-    then
+if [ -z "$2" ]; then
+    echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
 		VERSION="TEST"
 	else
-		VERSION="$1"
+		VERSION="$2"
 fi
 
 # Clang and GCC paths
