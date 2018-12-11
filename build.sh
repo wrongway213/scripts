@@ -53,23 +53,19 @@ process_build () {
 	else
 		# Move custom Image  to AK2
 		cp -f ${REPO_ROOT}/OP5-OP5T/out/arch/arm64/boot/Image.gz-dtb ${REPO_ROOT}/AnyKernelBase/kernels/custom/$1/Image.gz-dtb
-		# Clean up at the end as well for good measure
-		rm -rf ${REPO_ROOT}/OP5-OP5T/out
     # Back to Source
-    cd ${REPO_ROOT}/OP5-OP5T
-    
+    cd ${REPO_ROOT}/OP5-OP5T    
     echo "${TEXTGREEN}$1 Build Complete${TEXTRESET}"
 	fi
 	
-  # Cleanup
+  # Clean up at the end as well for good measure
   rm -rf ${REPO_ROOT}/OP5-OP5T/out
 }
 
-
 # Clean up if anything is remaining.
 rm -rf ${REPO_ROOT}/OP5-OP5T/out/
-
 cd ${REPO_ROOT}/OP5-OP5T
+git reset --hard HEAD~1
 
 # Ignore upper/lower case
 case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
@@ -90,8 +86,6 @@ case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
   *) echo -e "Please enter an argument\nValid arguments are: all treble nontreble"
     ;;
 esac
-
-git reset --hard HEAD~1
 
 if [ $BUILD_SUCCESS -eq 0 ]; then
   # Make zip and cleanup
