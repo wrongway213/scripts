@@ -21,11 +21,11 @@ if [ -z "$2" ]; then
 fi
 
 # Clang and GCC paths
-CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r344140b/bin/clang
+CLANG=${REPO_ROOT}/Toolchains/linux-x86/clang-r344140b/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
     CLANG="ccache ${CLANG}"
 fi
-CROSS_COMPILE=${REPO_ROOT}/ToolChains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+CROSS_COMPILE=${REPO_ROOT}/Toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 process_build () {
 	mkdir -p ${REPO_ROOT}/AnyKernelBase/kernels/custom/$1 ${REPO_ROOT}/AnyKernelBase/kernels/oos/$1
