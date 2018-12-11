@@ -5,7 +5,7 @@ TEXTGREEN=$(tput setaf 2)
 TEXTRED=$(tput setaf 1)
 BUILD_SUCCESS="999"
 
-export COMPILER_NAME="CLANG-8.0.3"
+export COMPILER_NAME="CLANG-8.0.4"
 # Export compiler name
 
 if [ -z ${KRIEG_SCRIPT+x} ]; then
@@ -21,7 +21,7 @@ if [ -z "$2" ]; then
 fi
 
 # Clang and GCC paths
-CLANG=${REPO_ROOT}/ToolChains/linux-x86/bin/clang
+CLANG=${REPO_ROOT}/ToolChains/linux-x86/clang-r344140b/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
     CLANG="ccache ${CLANG}"
 fi
