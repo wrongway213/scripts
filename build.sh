@@ -13,13 +13,6 @@ if [ -z ${KRIEG_SCRIPT+x} ]; then
 fi
 REPO_ROOT=`pwd`
 
-if [ -z "$2" ]; then
-    echo "${TEXTRED}NO Version number specified. Naming zips as TEST ${TEXTRESET}"
-		VERSION="TEST"
-	else
-		VERSION="$2"
-fi
-
 # Clang and GCC paths
 CLANG=${REPO_ROOT}/Toolchains/linux-x86/clang-r344140b/bin/clang
 if [ ${USE_CCACHE:-"0"} = "1" ]; then
@@ -60,12 +53,11 @@ process_build () {
 	
   # Clean up at the end as well for good measure
   rm -rf ${REPO_ROOT}/OP5-OP5T/out
+  [ "$1" == "nontreble" ] && git reset --hard HEAD~1
 }
 
 # Clean up if anything is remaining.
-rm -rf ${REPO_ROOT}/OP5-OP5T/out/
-cd ${REPO_ROOT}/OP5-OP5T
-git reset --hard HEAD~1
+rm -rf ${REPO_ROOT}/OP5-OP5T/out
 
 # Ignore upper/lower case
 case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
