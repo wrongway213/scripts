@@ -59,6 +59,7 @@ process_build () {
 
 # Clean up if anything is remaining.
 rm -rf ${REPO_ROOT}/OP5-OP5T/out
+cd ${REPO_ROOT}/OP5-OP5T
 
 # Ignore upper/lower case
 case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
