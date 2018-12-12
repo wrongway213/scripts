@@ -4,6 +4,7 @@ TEXTRESET=$(tput sgr0)
 TEXTGREEN=$(tput setaf 2)
 TEXTRED=$(tput setaf 1)
 BUILD_SUCCESS="999"
+VERSION="$2"
 
 export COMPILER_NAME="CLANG-8.0.4"
 # Export compiler name
